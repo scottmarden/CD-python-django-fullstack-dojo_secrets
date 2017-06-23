@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<h1>Login & Register</h1>
+			<h1>Want to Know a Secret?</h1>
 		</div>
 		<div id="errors">
 			{% if messages %}
@@ -24,7 +24,7 @@
 					{% csrf_token %}
 					Email: <input type="text" name="email" />
 					Password: <input type="password" name="password" />
-					<input type="submit" value="Login" />
+					<button type="submit">Login!</button>
 				</form>
 			</fieldset>
 		</div>
@@ -36,9 +36,10 @@
 					First Name: <input type="text" name="first_name" />
 					Last Name: <input type="text" name="last_name" />
 					Email: <input type="email" name="email" />
+					birthday: <input type="date" name="birthday" />
 					Password: <input type="password" name="password" />
-					Confirm Password: <input type="password" name="confirm" />
-					<input type="submit" value="Register" />
+					Confirm Password: <input type="password" name="pw_confirm" />
+					<button type="submit">Register!</button>
 				</form>
 			</fieldset>
 		</div>
