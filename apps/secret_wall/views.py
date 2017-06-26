@@ -9,7 +9,7 @@ import datetime
 
 
 # Create your views here.
-#------------------------------------Login & Registration--------------------------
+#-------------------------------Login, Registration & Logout--------------------------
 def index(request):
 	if 'user_id' in request.session:
 		return redirect('/success')
@@ -34,6 +34,10 @@ def login(request):
 	else:
 		request.session['user_id'] = result.id
 		return redirect('/success')
+
+def logout(request):
+	request.session.flush()
+	return redirect('/')
 #------------------------------------Homepage--------------------------------------
 def success(request):
 	if 'user_id' not in request.session:
@@ -92,7 +96,7 @@ def known_secrets(request):
 	}
 	return render(request, 'secret_wall/known_secrets.html', context)
 
-#------------------------------------Liked & Created by User Page-------------------------------
+#--------------------------Neither Liked nor Created by User Page-------------------------------
 def unknown_secrets(request):
 	if 'user_id' not in request.session:
 		return redirect('/')
@@ -107,6 +111,3 @@ def unknown_secrets(request):
 	return render(request, 'secret_wall/unknown_secrets.html', context)
 
 #-----------------------------------Logout-------------------------------------------
-def logout(request):
-	request.session.flush()
-	return redirect('/')
