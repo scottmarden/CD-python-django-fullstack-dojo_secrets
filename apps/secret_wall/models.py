@@ -2,10 +2,14 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.db.models import Q, Count
 import re, bcrypt, datetime
 from dateutil.relativedelta import relativedelta
+from datetime import timedelta
 
 # Create your models here.
+
+#------------------------------------User & Manager--------------------------
 class UserManager(models.Manager):
 	def register(self, data):
 		EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
@@ -82,8 +86,45 @@ class User(models.Model):
 
 	objects = UserManager()
 
+#------------------------------------Secret & Manager--------------------------
+
 class SecretManager(models.Manager):
-	pass
+	def recent_secrets(self):
+		secrets = Secret.objects.filter().annotate(num_likes=Count('likes')).order_by('-created_at')[:5]
+		return secrets
+
+	def secrets_rank(self):
+		secrets = Secret.objects.annotate(num_likes=Count('likes')).order_by('-num_likes')
+		return secrets
+
+	def post(self, new_secret, user):
+		if len(new_secret) < 1:
+			error = "You must enter a secret before pressing 'post'."
+			return error
+		else:
+			new_secret = Secret.objects.create(secret=new_secret, creator=user)
+		return new_secret
+
+	def new_like(self, secret_id, user_id):
+		user = User.objects.get(id=user_id)
+		secret = Secret.objects.get(id=secret_id)
+		result = user.liked_secrets.add(secret)
+		return result
+
+	def created_secrets(self, user_id):
+		result = Secret.objects.annotate(num_likes=Count('likes')).filter(creator__id=user_id)
+		return result
+
+	def user_likes(self, user_id):
+		liked_secrets = Secret.objects.annotate(num_likes=Count('likes')).filter(likes__id=user_id)
+		return liked_secrets
+
+	def unknown_secrets(self, user_id):
+		unknown_secrets = Secret.objects.annotate(num_likes=Count('likes')).exclude(likes__id=user_id).exclude(creator__id=user_id)
+		print unknown_secrets
+		for secret in unknown_secrets:
+			print secret.creator
+		return unknown_secrets
 
 class Secret(models.Model):
 	secret = models.TextField()
