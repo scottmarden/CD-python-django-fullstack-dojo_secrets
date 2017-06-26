@@ -6,42 +6,44 @@
 	</head>
 	<body>
 		<div id="wrapper">
-			<h1>Want to Know a Secret?</h1>
-		</div>
-		<div id="errors">
-			{% if messages %}
-			<ul class="messages">
-				{% for message in messages %}
-				<li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-				{% endfor %}
-			</ul>
-			{% endif %}
-		</div>
-		<div id="login">
-			<fieldset>
-				<legend>Login:</legend>
-				<form action="/login" method="post">
-					{% csrf_token %}
-					Email: <input type="text" name="email" />
-					Password: <input type="password" name="password" />
-					<button type="submit">Login!</button>
-				</form>
-			</fieldset>
-		</div>
-		<div id="registration">
-			<fieldset>
-				<legend>Register</legend>
-				<form action="/register" method="post">
-					{% csrf_token %}
-					First Name: <input type="text" name="first_name" />
-					Last Name: <input type="text" name="last_name" />
-					Email: <input type="email" name="email" />
-					birthday: <input type="date" name="birthday" />
-					Password: <input type="password" name="password" />
-					Confirm Password: <input type="password" name="pw_confirm" />
-					<button type="submit">Register!</button>
-				</form>
-			</fieldset>
+			<div id="header">
+				<h1>Want to Know a Secret?</h1>
+			</div>
+			<div id="errors">
+				{% if messages %}
+				<ul class="messages">
+					{% for message in messages %}
+					<li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+			</div>
+			<div id="login">
+				<fieldset>
+					<legend>Login:</legend>
+					<form action="/login" method="post">
+						{% csrf_token %}
+						Email: <input type="text" name="email" />
+						Password: <input type="password" name="password" />
+						<button type="submit">Login!</button>
+					</form>
+				</fieldset>
+			</div>
+			<div id="registration">
+				<fieldset>
+					<legend>Register</legend>
+					<form action="/register" method="post">
+						{% csrf_token %}
+						First Name: <input type="text" name="first_name" />
+						Last Name: <input type="text" name="last_name" />
+						Email: <input type="email" name="email" />
+						birthday: <input type="date" name="birthday" />
+						Password: <input type="password" name="password" />
+						Confirm Password: <input type="password" name="pw_confirm" />
+						<button type="submit">Register!</button>
+					</form>
+				</fieldset>
+			</div>
 		</div>
 	</body>
 </html>
