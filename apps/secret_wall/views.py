@@ -109,5 +109,3 @@ def unknown_secrets(request):
 		'liked_secrets': liked_secrets,
 	}
 	return render(request, 'secret_wall/unknown_secrets.html', context)
-
-#-----------------------------------Logout-------------------------------------------
