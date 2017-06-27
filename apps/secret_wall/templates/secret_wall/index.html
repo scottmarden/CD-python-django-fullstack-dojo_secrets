@@ -34,12 +34,12 @@
 					<legend>Register</legend>
 					<form action="/register" method="post">
 						{% csrf_token %}
-						First Name: <input type="text" name="first_name" />
-						Last Name: <input type="text" name="last_name" />
-						Email: <input type="email" name="email" />
-						birthday: <input type="date" name="birthday" />
-						Password: <input type="password" name="password" />
-						Confirm Password: <input type="password" name="pw_confirm" />
+						<label for="first_name">First Name<input type="text" name="first_name"></label>
+						<label for="last_name">Last Name<input type="text" name="last_name"></label>
+						<label for="email">Email<input type="email" name="email"></label>
+						<label for="birthday">Birthday<input type="date" name="birthday"></label>
+						<label for="password">Password<input type="password" name="password"></label>
+						<label for="pw_confirm">Confirm Password<input type="password" name="pw_confirm"></label>
 						<button type="submit">Register!</button>
 					</form>
 				</fieldset>

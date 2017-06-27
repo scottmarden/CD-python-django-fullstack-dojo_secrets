@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.db.models import Q, Count
+from django.db.models import Count
 import re, bcrypt, datetime
 from dateutil.relativedelta import relativedelta
 from datetime import timedelta
